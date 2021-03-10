@@ -1,0 +1,196 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: #000;
+    overflow: hidden;
+}
+
+/* Main Page */
+
+.background-movie .banner-movie {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.background-movie .banner-movie img {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    position: relative;
+    display: flex;  
+}
+
+@keyframes slide-desc {
+    from { 
+        opacity: 0;
+        transform: translateX(-70px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.desc-movie {
+    display: flex;
+    width: 50%;
+    height: 100vh;
+    justify-content: center;
+    color: #FFF;
+    padding-left: 70px;
+    flex-direction: column;
+    position: relative;
+    transition: 0.5s ease-in-out;
+    animation-name: slide-desc;
+    animation-duration: 3s;
+}
+
+.desc-movie h2 {
+    padding: 10px 0;
+}
+
+.desc-movie p {
+    width: 500px;
+}
+
+.btn-movie {
+    width: 110px;
+}
+
+.trending-movies {
+    width: 50%;
+    margin: 50px 20px;
+}
+
+@keyframes slide-card {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+
+    }
+}
+
+.trending-card-movies {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    margin-left: 180px;
+    transition: .8s ease-in-out;
+    animation-name: slide-card;
+    animation-duration: 2s;
+}
+
+.card {
+    width: 130px;
+    border: none;
+    margin: 20px;
+}
+
+.card .card-movie.active {
+    width: 135px !important;
+}
+
+.card .card-movie .card-img-top {
+    border-radius: 5px;
+}
+
+.card .card-movie img {
+    transition: width .3s ease-in-out;
+}
+
+.card .card-movie img:hover {
+    width: 140px;
+}
+
+/* Detail Page */
+
+#detail-page {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    background-color: #050f1f;
+    background-color: rgba(5, 15, 31, 0.6);
+    transition-delay: .6s;
+    transition: all .6s ease-in-out;
+}
+
+.back-btn {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-top: 40px;
+    color: #FFF;
+}
+
+.detail-info-movie {
+    width: 65%;
+    position: relative;
+    color: #FFF;
+    margin-left: 50px;
+    margin-top: 100px;
+}
+
+.card .card-movie-detail {
+    width: 150px;
+}
+
+.detail-desc p {
+    width: 600px;
+}
+
+.info-movie {
+    display: flex;
+    justify-content: space-between;
+    width: 100px;
+}
+
+.related-video {
+    width: 35%;
+    position: relative;
+    margin-top: 100px;
+}
+
+.content-movie {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+/* Animate */
+
+    /* Main Page */
+.background-movie.animate .banner-movie {
+    opacity: 0;
+}
+
+    /* Detail Page */
+#movie-page.detail-mode #detail-page {
+    transform: translateY(-100%);
+    z-index: 100;
+}
+
+#movie-page.detail-mode .background-movie .content .desc-movie {
+    transform: translateX(-580px) !important;
+}
+
+#movie-page.detail-mode .background-movie .trending-movies .trending-card-movies {
+    transform: translateX(520px) !important;
+}
+
+#movie-page.detail-mode .background-movie .banner-movie {
+    -webkit-filter: blur(2px);
+}

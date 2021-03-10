@@ -1,0 +1,44 @@
+[
+    {   
+        "id" : 1,
+        "name" : "Kimi No Na Wa",
+        "desc" : "Your Name (Japanese: 君の名は。, Hepburn: Kimi no Na wa) is a 2016 Japanese animated romantic fantasy film produced by CoMix Wave Films and released by Toho. It depicts a high school boy in Tokyo and a high school girl in the Japanese countryside who suddenly and inexplicably begin to swap bodies.",
+        "time" : 107,
+        "rating": 8.4,
+        "image" : "kimi-no-nawa.jpg",
+        "poster" : "Kimi-no-Na-wa-poster.jpg",
+        "rank" : 1,
+        "page": "active",
+        "director": "Makoto Shinkai",
+        "trailer": "NooIc3dMncc",
+        "scene": ["",""]
+    },
+    {
+        "id" : 2,
+        "name" : "Tenki No Ko",
+        "desc" : "Weathering with You (Japanese: 天気の子, Hepburn: Tenki no Ko, lit. 'Child of Weather') is a 2019 Japanese animated romantic fantasy film produced by CoMix Wave Films and released by Toho. It depicts a high school boy who runs away from his rural home to Tokyo and befriends an orphan girl who has the ability to manipulate the weather.",
+        "time" : 112,
+        "rating": 7.5,
+        "image" : "tenki-no-ko.jpg",
+        "poster" : "tenki-no-ko-poster.jpg",
+        "rank" : 2,
+        "page": "",
+        "director": "Makoto Shinkai",
+        "trailer": "Q6iK6DjV_iE",
+        "scene": ["",""]
+    },
+    {
+        "id" : 3,
+        "name" : "Kotonoha No Niwa",
+        "desc" : "The Garden of Words (Japanese: 言の葉の庭, Hepburn: Kotonoha no Niwa) is a 2013 Japanese anime drama film written, directed and edited by Makoto Shinkai, The film focuses on Takao Akizuki, an aspiring 15-year-old shoemaker, and Yukari Yukino, a mysterious 27-year-old woman he keeps meeting at Shinjuku Gyoen National Garden on rainy mornings.",
+        "time" : 46,
+        "rating": 7.5,
+        "image" : "garden-of-word.jpg",
+        "poster" : "garden-of-word-poster.jpg",
+        "rank" : 3,
+        "page": "",
+        "director": "Makoto Shinkai",
+        "trailer": "xnLaOqqtCKs",
+        "scene": ["",""]
+    }
+]
