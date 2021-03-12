@@ -61,45 +61,13 @@ function showMovie(movie,status) {
                 ${movie.desc}
             </p>
         
-            <a href="#" class="btn btn-outline-info btn-movie">
+            <a href="#" class="btn btn-outline-info detail-btn">
                 See Detail
             </a>`
         );
-
-
-        $('.detail-info-movie').html(
-            `<div class="card">
-                <a href="#" class="card-movie-detail" movie="${movie.name}">
-                    <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-                </a>
-            </div>
-            <div class="detail-name">
-                <h2>${movie.name}</h2>
-            </div>
-            <div class="detail-desc">
-                <p>Y${movie.desc}</p>
-            </div>
-            <div class="info-movie">
-                <div class="rating">
-                    <p>${movie.rating}</p>
-                </div>
-                <div class="time">
-                    <p>${movie.time} min</p>
-                </div>
-            </div>
-            <div class="participant">
-                <div class="directur">
-                    <p>Directed By : ${movie.director}</p>
-                </div>
-            </div>`
-        )
-
-        $('.content-movie').html(
-            `<iframe width="300" height="180" src="https://www.youtube.com/embed/${movie.trailer}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
-        )
         
         // Call Function
-        getDetail(status);
+        getDetail(status, movie);
 
     }, 100);
 
@@ -115,7 +83,7 @@ function showMovie(movie,status) {
             $('.banner-movie').html(
                 `<img src="src/image/${movie.image}" alt="${movie.name}">`
             );  
-        }, 600);
+        }, 800);
     }
 }
 
@@ -152,7 +120,7 @@ function cardMovie() {
     });
 }
 
-function getDetail(status) {
+function getDetail(status, movie) {
 
     // Give detail movie from movie list with status 1 directly
     if(status == 1){
@@ -160,14 +128,57 @@ function getDetail(status) {
     }
     
     // Other status 1 mean give detail info from first page
-    $('.btn-movie').on("click", function(){
+    $('.detail-btn').on("click", function(){
+        movieDetail(movie);
         $('#movie-page').addClass('detail-mode');
+        $('body').css({ "overflow-y": "visible"})
     });
     
     // Back button from detail info
     $('.detail-back-btn').on("click", function(){
         $('#movie-page').removeClass('detail-mode');
+        $('body').css({ "overflow-y": "hidden"})
+        setTimeout( function(){
+            $('.detail-info-movie').empty();
+            $('.content-movie').empty();
+        }, 800)
     });
+}
+
+function movieDetail(movie){
+
+    setTimeout( function(){
+        $('.detail-info-movie').html(
+            `<div class="card">
+                <a href="#" class="card-movie-detail" movie="${movie.name}">
+                    <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
+                </a>
+            </div>
+            <div class="detail-name">
+                <h2>${movie.name}</h2>
+            </div>
+            <div class="detail-desc">
+                <p>Y${movie.desc}</p>
+            </div>
+            <div class="info-movie">
+                <div class="rating">
+                    <p>${movie.rating}</p>
+                </div>
+                <div class="time">
+                    <p>${movie.time} min</p>
+                </div>
+            </div>
+            <div class="participant">
+                <div class="directur">
+                    <p>Directed By : ${movie.director}</p>
+                </div>
+            </div>`
+        );
+
+        $('.content-movie').html(
+            `<iframe width="300" height="180" src="https://www.youtube.com/embed/${movie.trailer}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+        );
+    }, 100);
 }
 
 function getList() {
@@ -176,12 +187,17 @@ function getList() {
     $('.more-btn').on("click", function(){
         movieList(1);
         $('#movie-page').addClass('list-mode');
+        setTimeout( function(){
+            $('.desc-movie').empty();
+            $('.trending-card-movies .card .card-movie').empty();
+        }, 800);
     })
 
     // Back from list page, make list movie empty and back to first page (status 3 give in first page)
     $('.list-back-btn').on("click", function(){
         $('.trending-card-movies').empty();
         firstPage();
+        $('body').css({ "overflow-y": "hidden"})
         $('#movie-page').removeClass('list-mode');
         movieList(0);
     });
@@ -210,6 +226,7 @@ function movieList(status) {
         
                 $(this).on("click", function(){
                     let movie_name = $(this).attr('movie');
+                    $('body').css({ "overflow-y": "visible"})
                     
                     // Find movie alike attr movie
                     $.getJSON(json_path, function(data){
@@ -217,6 +234,7 @@ function movieList(status) {
                         
                         // Show movie detail directly with status 1
                         showMovie(movie,1);
+                        movieDetail(movie);
                     });
                 });
             })
@@ -228,7 +246,6 @@ function movieList(status) {
         }, 800);
     }
 }
-
 
 
 
