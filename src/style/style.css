@@ -15,7 +15,7 @@ body {
     width: 100%;
     height: 100vh;
     opacity: 1;
-    transition: opacity 1s ease-in-out;
+    transition: opacity .8s ease-in-out;
 }
 
 .background-movie .banner-movie img {
@@ -109,7 +109,7 @@ body {
     display: flex;
     height: 100%;
     margin-left: 180px;
-    transition: .8s ease-in-out;
+    transition: transform .8s ease-in-out;
 }
 
 .card {
@@ -132,7 +132,7 @@ body {
     height: 190px;
 }
 
-.card .card-movie:hover {
+.trending-card-movies .card .card-movie:hover {
     width: 140px;
     height: 190px;
 }
@@ -147,10 +147,11 @@ body {
     background-color: #050f1f;
     background-color: rgba(5, 15, 31, 0.6);
     transition-delay: .6s;
-    transition: all .6s ease-in-out;
+    transition: all .8s ease-in-out;
+    z-index: 100;
 }
 
-.back-btn {
+.detail-back-btn {
     position: absolute;
     text-align: center;
     width: 100%;
@@ -192,6 +193,47 @@ body {
     flex-direction: column;
 }
 
+/* Movie List */
+
+#movie-list {
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0px;
+    right: -100%;
+    transition: .8s ease-in-out;
+}
+
+.movie-list-warp {
+    margin-top: 100px;
+    height: 100%;
+}
+
+.card.card-list .card-movie {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card.card-list .card-movie img {
+    transition: .4s ease-in-out;
+}
+
+.card.card-list a img:hover {
+    width: 140px;
+}
+
+#movie-list .list-back-btn {
+    color: #000;
+    left: 30px;
+    top: 20px;
+    position: relative;
+}
+
+#movie-list .list-back-btn:hover {
+    color: grey;
+}
 
 /* Animate */
 
@@ -216,4 +258,23 @@ body {
 
 #movie-page.detail-mode .background-movie .banner-movie {
     -webkit-filter: blur(2px);
+}
+
+    /* List Page */
+#movie-page.list-mode #movie-list {
+    right: 0px;
+}
+
+#movie-page.list-mode .background-movie .content .desc-movie {
+    transform: translateX(500px);
+    opacity: 0;
+}
+
+#movie-page.list-mode .background-movie .trending-movies .card-warp {
+    transform: translateX(500px) !important;
+    opacity: 0;
+}
+
+#movie-page.list-mode.detail-mode #movie-list {
+    opacity: 0;
 }

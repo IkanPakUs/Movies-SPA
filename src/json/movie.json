@@ -10,8 +10,7 @@
         "rank" : 1,
         "page": "active",
         "director": "Makoto Shinkai",
-        "trailer": "NooIc3dMncc",
-        "scene": ["",""]
+        "trailer": "NooIc3dMncc"
     },
     {
         "id" : 2,
@@ -24,13 +23,12 @@
         "rank" : 2,
         "page": "",
         "director": "Makoto Shinkai",
-        "trailer": "Q6iK6DjV_iE",
-        "scene": ["",""]
+        "trailer": "Q6iK6DjV_iE"
     },
     {
         "id" : 3,
         "name" : "Kotonoha No Niwa",
-        "desc" : "The Garden of Words (Japanese: 言の葉の庭, Hepburn: Kotonoha no Niwa) is a 2013 Japanese anime drama film written, directed and edited by Makoto Shinkai, The film focuses on Takao Akizuki, an aspiring 15-year-old shoemaker, and Yukari Yukino, a mysterious 27-year-old woman he keeps meeting at Shinjuku Gyoen National Garden on rainy mornings.",
+        "desc" : "The Garden of Words (Japanese: 言の葉の庭, Hepburn: Kotonoha no Niwa) is a 2013 Japanese anime drama film written, The film focuses on Takao Akizuki, an aspiring 15-year-old shoemaker, and Yukari Yukino, a mysterious 27-year-old woman he keeps meeting at Shinjuku Gyoen National Garden on rainy mornings.",
         "time" : 46,
         "rating": 7.5,
         "image" : "garden-of-word.jpg",
@@ -38,7 +36,32 @@
         "rank" : 3,
         "page": "",
         "director": "Makoto Shinkai",
-        "trailer": "xnLaOqqtCKs",
-        "scene": ["",""]
+        "trailer": "xnLaOqqtCKs"
+    },
+    {
+        "id" : 4,
+        "name" : "Hello World",
+        "desc" : "The year is 2027, and the city of Kyoto has undergone tremendous technological advancement. Within the city lives Naomi Katagaki, a socially awkward and introverted boy with a love for books, and Ruri Ichigyou, a girl with a cold personality who is often blunt with people, but shares his love for reading. Despite having similar interests, Naomi is afraid to approach Ruri due to her unfriendly nature.",
+        "time" : 97,
+        "rating": 7.6,
+        "image" : "hello-world.jPG",
+        "poster" : "hello-world-poster.jpg",
+        "rank" : 4,
+        "page": "",
+        "director": "Itou, Tomohiko",
+        "trailer": "juwLvKPz7Ks"
+    },
+    {
+        "id" : 5,
+        "name" : "Eiga Koe no Katachi",
+        "desc" : "A Silent Voice (Japanese: 映画 聲の形, Hepburn: Eiga Koe no Katachi), Japanese high school student Shoya Ishida intends to kill himself. Changing his mind at the last minute, he recalls his days in elementary school and the events that have led him here: A new student named Shoko Nishimiya informs the class that she is deaf. She tries to integrate with the class but ends up being an easy target for Shoya and his friends to bully. ",
+        "time" : 250,
+        "rating": 8.99,
+        "image" : "koe-no-katachi.jPG",
+        "poster" : "koe-no-katachi-poster.jpg",
+        "rank" : 5,
+        "page": "",
+        "director": "Yamada, Naoko",
+        "trailer": "nfK6UgLra7g"
     }
 ]
