@@ -7,10 +7,16 @@ body {
     background-color: #000;
     overflow-x: hidden;
     overflow-y: hidden;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;
 }
 
 body, html {
-    height: 100%;
+    height: auto;
+}
+
+body::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 /* Main Page */
@@ -68,6 +74,7 @@ body, html {
 
 .detail-btn {
     width: 110px;
+    cursor: pointer;
 }
 
 .trending-movies {
@@ -112,6 +119,7 @@ body, html {
     top: -15px;
     right: 25px;
     color: #FFF;
+    cursor: pointer;
 }
 
 .more-btn:hover {
@@ -138,6 +146,7 @@ body, html {
     transition: .3s ease-in-out;
     overflow: hidden;
     border-radius: 5px !important;
+    cursor: pointer;
 }
 
 .card .card-movie.active {
@@ -153,14 +162,17 @@ body, html {
 /* Detail Page */
 
 #detail-page {
-    display: flex;
-    height: 100vh;
+    height: auto;
     width: 100%;
-    position: absolute;
-    background-color: rgba(5, 15, 31, 0.6);
-    transition-delay: .6s;
-    transition: all .8s ease-in-out;
     z-index: 100;
+    transition: all .8s ease-in-out;
+    position: absolute;
+}
+
+.brief-info {
+    background-color: rgba(5, 15, 31, 0.6);
+    display: flex;
+    height: 93vh;
 }
 
 .detail-back-btn {
@@ -168,7 +180,12 @@ body, html {
     text-align: center;
     width: 100%;
     margin-top: 40px;
+    cursor: pointer;
     color: #FFF;
+}
+
+.detail-back-btn:hover {
+    color: aquamarine;
 }
 
 .detail-info-movie {
@@ -216,9 +233,8 @@ body, html {
 }
 
 #review-page {
-    height: 100vh;
+    height: 107vh;
     background-color: #050f1f;
-    position: relative;
 }
 
 /* Movie List */
@@ -244,13 +260,14 @@ body, html {
     align-items: center;
     width: 150px;
     height: 210px;
+    cursor: pointer;
 }
 
 .row-card .col .card.card-list .card-movie img {
     transition: .4s ease-in-out;
 }
 
-.row-card .col .card.card-list a img:hover {
+.row-card .col .card.card-list .card-movie img:hover {
     width: 160px;
 }
 
@@ -260,9 +277,10 @@ body, html {
 
 #movie-list .list-back-btn {
     color: #fff;
-    left: 30px;
-    top: 20px;
+    left: 50px;
+    top: 40px;
     position: relative;
+    cursor: pointer;
 }
 
 #movie-list .list-back-btn:hover {
@@ -304,9 +322,9 @@ body, html {
     -webkit-filter: blur(2px);
 }
 
-#movie-page.detail-mode .background-movie .banner-movie {
-    width: 101.2%;
-}
+/* #movie-page.detail-mode #review-page {
+    transform: translateY(-7vh);
+} */
 
     /* List Page */
 #movie-page.list-mode #movie-list {

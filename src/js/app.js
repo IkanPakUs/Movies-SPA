@@ -28,8 +28,10 @@ function parallaxEffect() {
     $window.scroll( function scroll(){
         let height = $window.scrollTop();
 
-        if(height >= 1 && height <= 695) {
+        if(height >= 1) {
             $('.banner-movie').offset({ top: height / 2 })
+        } else {
+            $('.banner-movie').offset({ top: 0 })
         }
     });
 }
@@ -49,9 +51,9 @@ function firstPage(){
         $.each(trending, function(id, data){
             $('.trending-card-movies').append(
                 `<div class="card">
-                    <a href="#" class="card-movie ${data.page}" movie="${data.name}">
+                    <div class="card-movie ${data.page}" movie="${data.name}">
                         <img src="src/image/${data.poster}" class="card-img-top" alt="...">
-                    </a>
+                    </div>
                 </div>`
             );
         });
@@ -73,9 +75,9 @@ function showMovie(movie,status) {
                 ${movie.desc}
             </p>
         
-            <a href="#" class="btn btn-outline-info detail-btn">
+            <div class="btn btn-outline-info detail-btn">
                 See Detail
-            </a>`
+            </div>`
         );
         
         // Call Function
@@ -143,16 +145,17 @@ function getDetail(status, movie) {
     $('.detail-btn').on("click", function(){
         movieDetail(movie);
         $('#movie-page').addClass('detail-mode');
-        $('body').css({ "overflow-y": "visible"})
+        $('body').css({ "overflow-y": "visible"});
     });
     
     // Back button from detail info
     $('.detail-back-btn').on("click", function(){
         $('#movie-page').removeClass('detail-mode');
-        $('body').css({ "overflow-y": "hidden"})
+        $('body').css({ "overflow-y": "hidden"});
         setTimeout( function(){
             $('.detail-info-movie').empty();
             $('.content-movie').empty();
+            $('#review-page').empty();
         }, 800)
     });
 }
@@ -196,6 +199,10 @@ function movieDetail(movie){
         $('.content-movie').html(
             `<iframe width="300" height="180" src="https://www.youtube.com/embed/${movie.trailer}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
         );
+
+        $('#review-page').html(
+            `<h4>Scroll to Bottom</h4>`
+        )
     }, 100);
 }
 
@@ -232,9 +239,9 @@ function movieList(status) {
                 $('.row-card').append(
                     `<div class="col">
                         <div class="card card-list">
-                            <a href="#" class="card-movie" movie="${movie.name}">
+                            <div class="card-movie" movie="${movie.name}">
                                 <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-                            </a>
+                            </div>
                         </div>
                     </div>`
                 )
