@@ -8,7 +8,6 @@ $(document).ready( function(){
     firstPage();
     disableScroll();
     getList();
-    parallaxEffect();
 })
 
 // Desc Status
@@ -21,19 +20,6 @@ function disableScroll() {
     // Disable user to scroll bottom
 
     $page.scrollTop = $window.scrollY;
-}
-
-function parallaxEffect() {
-    
-    $window.scroll( function scroll(){
-        let height = $window.scrollTop();
-
-        if(height >= 1) {
-            $('.banner-movie').offset({ top: height / 2 })
-        } else {
-            $('.banner-movie').offset({ top: 0 })
-        }
-    });
 }
 
 function firstPage(){
@@ -145,13 +131,11 @@ function getDetail(status, movie) {
     $('.detail-btn').on("click", function(){
         movieDetail(movie);
         $('#movie-page').addClass('detail-mode');
-        $('body').css({ "overflow-y": "visible"});
     });
     
     // Back button from detail info
     $('.detail-back-btn').on("click", function(){
         $('#movie-page').removeClass('detail-mode');
-        $('body').css({ "overflow-y": "hidden"});
         setTimeout( function(){
             $('.detail-info-movie').empty();
             $('.content-movie').empty();
@@ -210,19 +194,21 @@ function getList() {
     
     // Go to movie list page, and make list card with status 1
     $('.more-btn').on("click", function(){
+        
         movieList(1);
         $('#movie-page').addClass('list-mode');
+
         setTimeout( function(){
             $('.desc-movie').empty();
-            $('.trending-card-movies .card .card-movie').empty();
+            $('.trending-card-movies').empty();
         }, 800);
     })
 
     // Back from list page, make list movie empty and back to first page (status 3 give in first page)
     $('.list-back-btn').on("click", function(){
         $('.trending-card-movies').empty();
+        $('body').css({ "overflow-y": "hidden" })
         firstPage();
-        $('body').css({ "overflow-y": "hidden"})
         $('#movie-page').removeClass('list-mode');
         movieList(0);
     });
@@ -251,7 +237,6 @@ function movieList(status) {
         
                 $(this).on("click", function(){
                     let movie_name = $(this).attr('movie');
-                    $('body').css({ "overflow-y": "visible"})
                     
                     // Find movie alike attr movie
                     $.getJSON(json_path, function(data){
@@ -263,6 +248,14 @@ function movieList(status) {
                     });
                 });
             })
+
+            // Enable / Disable scroll
+
+            let list_height_page = $('#movie-list').height();
+
+            if (list_height_page > 695) {
+                $('body').css({ "overflow-y": "visible" })
+            }
         });
     } else {
         // Delete all card list from movie list page

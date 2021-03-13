@@ -26,7 +26,7 @@
         "trailer": "Q6iK6DjV_iE"
     },
     {
-        "id" : 3,
+        "id" : 6,
         "name" : "Kotonoha No Niwa",
         "desc" : "The Garden of Words (Japanese: 言の葉の庭, Hepburn: Kotonoha no Niwa) is a 2013 Japanese anime drama film written, The film focuses on Takao Akizuki, an aspiring 15-year-old shoemaker, and Yukari Yukino, a mysterious 27-year-old woman he keeps meeting at Shinjuku Gyoen National Garden on rainy mornings.",
         "time" : 46,
@@ -63,5 +63,44 @@
         "page": "",
         "director": "Yamada, Naoko",
         "trailer": "nfK6UgLra7g"
+    },
+    {
+        "id" : 6,
+        "name" : "Kimetsu no Yaiba the Movie: Mugen Train",
+        "desc" : "Demon Slayer: Kimetsu no Yaiba the Movie: Mugen Train (Japanese: 劇場版「鬼滅の刃」 無限列車編, Hepburn: Gekijō-ban 'Kimetsu no Yaiba' Mugen Ressha-hen), Tanjiro, Nezuko, Zenitsu and Inosuke board a train [N 1] to assist the Flame Hashira Kyōjurō Rengoku in his mission to hunt for a demon that has killed many demon slayers. Soon after boarding, all of them are enchanted and fall into a deep sleep. Enmu, Lower Rank One of the Twelve Kizuki, instructs four passengers, all suffering from severe insomnia, to enter the demon slayers' dreams and destroy their spiritual cores so that they can't wake up again.",
+        "time" : 117,
+        "rating": 8.3,
+        "image" : "kimetsu-no-yaiba.jPG",
+        "poster" : "kimetsu-no-yaiba-poster.jpg",
+        "rank" : 6,
+        "page": "",
+        "director": "Haruo Sotozaki",
+        "trailer": "ATJYac_dORw"
+    },
+    {
+        "id" : 7,
+        "name" : "Stand by Me Doraemon 2",
+        "desc" : "Stand by Me Doraemon 2 (STAND BY ME ドラえもん 2), Nobita - following his previous adventure - has managed to change his future for the better, making Shizuka marry him. Taken by despair, however, he decides to return to the past to re-meet his beloved grandmother, who died when he was still in kindergarten and to whom he was really fond of; grandmother is happy that Nobita came back in time to be with her, and confides in him a great desire: to meet his future bride.",
+        "time" : 96,
+        "rating": "-",
+        "image" : "doraemon-2.jPG",
+        "poster" : "doraemon-2-poster.png",
+        "rank" : 7,
+        "page": "",
+        "director": "Ryuichi Yagi, Takashi Yamazaki",
+        "trailer": "Lz-HUqdjJWc"
+    },
+    {
+        "id" : 7,
+        "name" : "Boku no Hero Academia the Movie 2: Heroes:Rising",
+        "desc" : "My Hero Academia: Two Heroes (Japanese: 僕のヒーローアカデミア THE MOVIE ～２人の英雄ヒーロー～, Hepburn: Boku no Hīrō Academia THE MOVIE: Futari no Hīrō), A flashback shows a young All Might in Las Vegas, dealing with a couple of villains that robbed a casino, aided by his friend David who has worked with All Might and designed many of his suits.",
+        "time" : 104,
+        "rating": 8.08,
+        "image" : "boku-no-hero.jPG",
+        "poster" : "boku-no-hero-poster.jpg",
+        "rank" : 8,
+        "page": "",
+        "director": "Tomo Ōkubo",
+        "trailer": "iaMLBWj6HjI"
     }
 ]
