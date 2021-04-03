@@ -8,6 +8,7 @@ $(document).ready(function () {
   firstPage();
   disableScroll();
   getList();
+  liveSearch();
 });
 
 // Desc Status
@@ -34,11 +35,11 @@ async function firstPage() {
     let trending = data.filter((el) => el.rank <= 3);
 
     // Make card movie from trending
-    $.each(trending, function (id, data) {
+    $.each(trending, function (id, movie) {
       $(".trending-card-movies").append(
         `<div class="card">
-                    <div class="card-movie ${data.page}" movie="${data.name}">
-                        <img src="src/image/${data.poster}" class="card-img-top" alt="...">
+                    <div class="card-movie ${movie.page}" movie="${movie.name}">
+                        <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
                     </div>
                 </div>`
       );
@@ -247,4 +248,20 @@ function movieList(status) {
       $(".row-card").empty();
     }, 800);
   }
+}
+
+function liveSearch() {
+  $('.form-control').on('keyup', function() {
+    let data_search = $(this).val();
+
+    let expre = new RegExp(data_search, "i");
+
+    $.getJSON(json_path, function(data){
+      $.each(data, function(id, movie){
+        if(movie.name.search(expre) != -1 || movie.location.search(expre != -1)){
+          console.log(movie.name);
+        }
+      });
+    });
+  });
 }
