@@ -77,6 +77,19 @@ function trendingCard(movie_name) {
   });
 }
 
+function detailListCard(movie_name) {
+
+  // Find movie alike attr movie
+  $.getJSON(json_path, function (data) {
+    let movie = data.find((el) => el.name == movie_name);
+
+    // Show movie detail directly with status 1
+    backgroundDisplay( 1, movie);
+    detailDisplay(movie);
+    getDetail(1,null)
+  });
+}
+
 async function movieList(status) {
   // If status 1, and then make card list to movie list page
   if (status == 1) {
@@ -180,15 +193,7 @@ function getListCard() {
     $(this).on("click", function () {
       let movie_name = $(this).attr("movie");
 
-      // Find movie alike attr movie
-      $.getJSON(json_path, function (data) {
-        let movie = data.find((el) => el.name == movie_name);
-
-        // Show movie detail directly with status 1
-        backgroundDisplay( 1, movie);
-        detailDisplay(movie);
-        getDetail(1,null)
-      });
+      detailListCard(movie_name);
     });
   });
 }
