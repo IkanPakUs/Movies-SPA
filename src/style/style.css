@@ -246,7 +246,7 @@ body::-webkit-scrollbar {
 }
 
 .movie-list-warp {
-    margin-top: 100px;
+    margin-top: 60px;
     margin-bottom: 100px;
 }
 
@@ -273,7 +273,7 @@ body::-webkit-scrollbar {
 
 #movie-list .list-back-btn {
     color: #fff;
-    left: 50px;
+    left: 5px;
     top: 40px;
     position: relative;
     cursor: pointer;
@@ -282,6 +282,22 @@ body::-webkit-scrollbar {
 
 #movie-list .list-back-btn:hover {
     color: grey;
+}
+
+#movie-list .search-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+#movie-list .search-form .form-control {
+    width: 400px;
+    border: none;   
+}
+
+#movie-list .search-form .form-control:focus {
+    box-shadow: none;
 }
 
 .row-card .col .card {
