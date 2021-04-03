@@ -5,10 +5,10 @@ let json_path = "src/json/movie.json";
 
 // ------ READY FUNCT ------ //
 $(document).ready(function () {
-  firstPage();
   disableScroll();
-  getList();
   liveSearch();
+  firstPage();
+  getList();
 });
 
 // Desc Status
@@ -23,6 +23,30 @@ function disableScroll() {
   $page.scrollTop = $window.scrollY;
 }
 
+function liveSearch() {
+  $('.form-control').on('keyup', function() {
+    $('.row-card').empty();
+
+    let data_search = $(this).val();
+    let expre = new RegExp(data_search, "i");
+
+    $.getJSON(json_path, function(data){
+
+      $.each(data, function(id, movie){
+
+        if(movie.name.search(expre) != -1 ){
+          listDisplay(movie);
+        }
+      });
+
+      // Call Function
+      getListCard();
+    });
+  });
+}
+
+//------ GET DATA FROM JSON FUNCTION ------//
+
 async function firstPage() {
   // First page will appear, and page will appear when from list movie . With status 3
 
@@ -34,58 +58,54 @@ async function firstPage() {
     // Trending card rank 1 - 3
     let trending = data.filter((el) => el.rank <= 3);
 
-    // Make card movie from trending
-    $.each(trending, function (id, movie) {
-      $(".trending-card-movies").append(
-        `<div class="card">
-                    <div class="card-movie ${movie.page}" movie="${movie.name}">
-                        <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-                    </div>
-                </div>`
-      );
-    });
+    trendingDisplay(trending);
 
     // Call Function
-    showMovie(spotlight, 3);
+    spotlightDisplay(3, spotlight);
   });
 
-  cardMovie();
+  getTrendingCard();
 }
 
-function showMovie(movie, status) {
-  // Showing movie information
-  setTimeout(function () {
-    $(".desc-movie").html(
-      `<h2>${movie.name}</h2>
-            <p>
-                ${movie.desc}
-            </p>
-        
-            <div class="btn btn-outline-info detail-btn">
-                See Detail
-            </div>`
-    );
+function trendingCard(movie_name) {
+  // Get JSON alike the card clicked
+  $.getJSON(json_path, function (data) {
+    let movie_info = data.find((el) => el.name == movie_name);
 
-    // Call Function
-    getDetail(status, movie);
-  }, 100);
+    // Show the movie info with status 2
+    spotlightDisplay(2, movie_info);
+  });
+}
 
-  // Status 3 and status 1 cause from list page and for first page need directly
-  if (status === 3 || status === 1) {
-    $(".banner-movie").html(
-      `<img src="src/image/${movie.image}" alt="${movie.name}">`
-    );
+async function movieList(status) {
+  // If status 1, and then make card list to movie list page
+  if (status == 1) {
+    await $.getJSON(json_path, function (data) {
+      $.each(data, function (id, movie) {
+        listDisplay(movie);
+      });
+    });
   } else {
-    // appart from status 3, with delay 600 ms
+    // Delete all card list from movie list page
     setTimeout(function () {
-      $(".banner-movie").html(
-        `<img src="src/image/${movie.image}" alt="${movie.name}">`
-      );
+      $(".row-card").empty();
     }, 800);
+  }
+
+  // Call Function
+  getListCard();
+
+  // Enable / Disable scroll
+  let list_height_page = $("#movie-list").height();
+
+  if (list_height_page > 695) {
+    $("body").css({ "overflow-y": "visible" });
   }
 }
 
-function cardMovie() {
+//------ LOGIC FUNCTION ------//
+
+function getTrendingCard() {
   // For trending card
   $(".trending-card-movies .card .card-movie").each(function () {
     $(this).on("click", function () {
@@ -104,13 +124,7 @@ function cardMovie() {
         }, 900);
       }
 
-      // Get JSON alike the card clicked
-      $.getJSON(json_path, function (data) {
-        let movie_info = data.find((el) => el.name == movie_name);
-
-        // Show the movie info with status 2
-        showMovie(movie_info, 2);
-      });
+      trendingCard(movie_name);
     });
   });
 }
@@ -123,7 +137,7 @@ function getDetail(status, movie) {
 
   // Other status 1 mean give detail info from first page
   $(".detail-btn").on("click", function () {
-    movieDetail(movie);
+    detailDisplay(movie);
     $("#movie-page").addClass("detail-mode");
   });
 
@@ -138,7 +152,113 @@ function getDetail(status, movie) {
   });
 }
 
-function movieDetail(movie) {
+function getList() {
+  // Go to movie list page, and make list card with status 1
+  $(".more-btn").on("click", function () {
+    movieList(1);
+    $("#movie-page").addClass("list-mode");
+
+    setTimeout(function () {
+      $(".desc-movie").empty();
+      $(".trending-card-movies").empty();
+    }, 800);
+  });
+
+  // Back from list page, make list movie empty and back to first page (status 3 give in first page)
+  $(".list-back-btn").on("click", function () {
+    $(".trending-card-movies").empty();
+    $("body").css({ "overflow-y": "hidden" });
+    firstPage();
+    $("#movie-page").removeClass("list-mode");
+    movieList(0);
+  });
+}
+
+function getListCard() {
+  // For card get detail
+  $(".row-card .col .card-list .card-movie").each(function () {
+    $(this).on("click", function () {
+      let movie_name = $(this).attr("movie");
+
+      // Find movie alike attr movie
+      $.getJSON(json_path, function (data) {
+        let movie = data.find((el) => el.name == movie_name);
+
+        // Show movie detail directly with status 1
+        backgroundDisplay( 1, movie);
+        detailDisplay(movie);
+        getDetail(1,null)
+      });
+    });
+  });
+}
+
+//------ DISPLAYING FUNCTION ------//
+
+function spotlightDisplay(status, movie) {
+  // Showing movie information
+  setTimeout(function () {
+    $(".desc-movie").html(
+      `<h2>${movie.name}</h2>
+            <p>
+                ${movie.desc}
+            </p>
+        
+            <div class="btn btn-outline-info detail-btn">
+                See Detail
+            </div>`
+    );
+
+    // Call Function
+    getDetail(status, movie);
+  }, 100);
+
+  backgroundDisplay(status, movie)
+}
+
+function trendingDisplay(movie){
+
+  // Make card movie from trending
+  $.each(movie, function (id, movie) {
+    $(".trending-card-movies").append(
+      `<div class="card">
+          <div class="card-movie ${movie.page}" movie="${movie.name}">
+              <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
+          </div>
+      </div>`
+    );
+  });
+}
+
+function backgroundDisplay(status, movie){
+  // Status 3 and status 1 cause from list page and for first page need directly
+  if (status === 3 || status === 1) {
+    $(".banner-movie").html(
+      `<img src="src/image/${movie.image}" alt="${movie.name}">`
+    );
+  } else {
+    // appart from status 3, with delay 600 ms
+    setTimeout(function () {
+      $(".banner-movie").html(
+        `<img src="src/image/${movie.image}" alt="${movie.name}">`
+      );
+    }, 800);
+  }
+}
+
+function listDisplay(movie) {
+  $(".row-card").append(
+    `<div class="col">
+        <div class="card card-list">
+            <div class="card-movie" movie="${movie.name}">
+                <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
+            </div>
+        </div>
+    </div>`
+  );
+}
+
+function detailDisplay(movie) {
   setTimeout(function () {
     $(".detail-info-movie").html(
       `<div class="card">
@@ -179,108 +299,4 @@ function movieDetail(movie) {
 
     $("#review-page").html(`<h4>Scroll to Bottom</h4>`);
   }, 100);
-}
-
-function getList() {
-  // Go to movie list page, and make list card with status 1
-  $(".more-btn").on("click", function () {
-    movieList(1);
-    $("#movie-page").addClass("list-mode");
-
-    setTimeout(function () {
-      $(".desc-movie").empty();
-      $(".trending-card-movies").empty();
-    }, 800);
-  });
-
-  // Back from list page, make list movie empty and back to first page (status 3 give in first page)
-  $(".list-back-btn").on("click", function () {
-    $(".trending-card-movies").empty();
-    $("body").css({ "overflow-y": "hidden" });
-    firstPage();
-    $("#movie-page").removeClass("list-mode");
-    movieList(0);
-  });
-}
-
-async function movieList(status) {
-  // If status 1, and then make card list to movie list page
-  if (status == 1) {
-    await $.getJSON(json_path, function (data) {
-      $.each(data, function (id, movie) {
-        $(".row-card").append(
-          `<div class="col">
-              <div class="card card-list">
-                  <div class="card-movie" movie="${movie.name}">
-                      <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-                  </div>
-              </div>
-          </div>`
-        );
-      });
-    });
-  } else {
-    // Delete all card list from movie list page
-    setTimeout(function () {
-      $(".row-card").empty();
-    }, 800);
-  }
-
-  // Call Function
-  listDetailCard();
-
-  // Enable / Disable scroll
-  let list_height_page = $("#movie-list").height();
-
-  if (list_height_page > 695) {
-    $("body").css({ "overflow-y": "visible" });
-  }
-}
-
-function listDetailCard() {
-  // For card get detail
-  $(".row-card .col .card-list .card-movie").each(function () {
-    $(this).on("click", function () {
-      let movie_name = $(this).attr("movie");
-
-      // Find movie alike attr movie
-      $.getJSON(json_path, function (data) {
-        let movie = data.find((el) => el.name == movie_name);
-
-        // Show movie detail directly with status 1
-        showMovie(movie, 1);
-        movieDetail(movie);
-      });
-    });
-  });
-}
-
-function liveSearch() {
-  $('.form-control').on('keyup', function() {
-    $('.row-card').empty();
-
-    let data_search = $(this).val();
-    let expre = new RegExp(data_search, "i");
-
-    $.getJSON(json_path, function(data){
-
-      $.each(data, function(id, movie){
-
-        if(movie.name.search(expre) != -1 ){
-          $('.row-card').append(
-            `<div class="col">
-                <div class="card card-list">
-                    <div class="card-movie" movie="${movie.name}">
-                        <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-                    </div>
-                </div>
-            </div>`
-          );
-        }
-      });
-
-      // Call Function
-      listDetailCard();
-    });
-  });
 }
