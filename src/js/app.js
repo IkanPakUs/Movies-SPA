@@ -203,44 +203,21 @@ function getList() {
   });
 }
 
-function movieList(status) {
+async function movieList(status) {
   // If status 1, and then make card list to movie list page
   if (status == 1) {
-    $.getJSON(json_path, function (data) {
+    await $.getJSON(json_path, function (data) {
       $.each(data, function (id, movie) {
         $(".row-card").append(
           `<div class="col">
-                        <div class="card card-list">
-                            <div class="card-movie" movie="${movie.name}">
-                                <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-                            </div>
-                        </div>
-                    </div>`
+              <div class="card card-list">
+                  <div class="card-movie" movie="${movie.name}">
+                      <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
+                  </div>
+              </div>
+          </div>`
         );
       });
-
-      $(".row-card .col .card-list .card-movie").each(function () {
-        $(this).on("click", function () {
-          let movie_name = $(this).attr("movie");
-
-          // Find movie alike attr movie
-          $.getJSON(json_path, function (data) {
-            let movie = data.find((el) => el.name == movie_name);
-
-            // Show movie detail directly with status 1
-            showMovie(movie, 1);
-            movieDetail(movie);
-          });
-        });
-      });
-
-      // Enable / Disable scroll
-
-      let list_height_page = $("#movie-list").height();
-
-      if (list_height_page > 695) {
-        $("body").css({ "overflow-y": "visible" });
-      }
     });
   } else {
     // Delete all card list from movie list page
@@ -248,20 +225,62 @@ function movieList(status) {
       $(".row-card").empty();
     }, 800);
   }
+
+  // Call Function
+  listDetailCard();
+
+  // Enable / Disable scroll
+  let list_height_page = $("#movie-list").height();
+
+  if (list_height_page > 695) {
+    $("body").css({ "overflow-y": "visible" });
+  }
+}
+
+function listDetailCard() {
+  // For card get detail
+  $(".row-card .col .card-list .card-movie").each(function () {
+    $(this).on("click", function () {
+      let movie_name = $(this).attr("movie");
+
+      // Find movie alike attr movie
+      $.getJSON(json_path, function (data) {
+        let movie = data.find((el) => el.name == movie_name);
+
+        // Show movie detail directly with status 1
+        showMovie(movie, 1);
+        movieDetail(movie);
+      });
+    });
+  });
 }
 
 function liveSearch() {
   $('.form-control').on('keyup', function() {
-    let data_search = $(this).val();
+    $('.row-card').empty();
 
+    let data_search = $(this).val();
     let expre = new RegExp(data_search, "i");
 
     $.getJSON(json_path, function(data){
+
       $.each(data, function(id, movie){
-        if(movie.name.search(expre) != -1 || movie.location.search(expre != -1)){
-          console.log(movie.name);
+
+        if(movie.name.search(expre) != -1 ){
+          $('.row-card').append(
+            `<div class="col">
+                <div class="card card-list">
+                    <div class="card-movie" movie="${movie.name}">
+                        <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
+                    </div>
+                </div>
+            </div>`
+          );
         }
       });
+
+      // Call Function
+      listDetailCard();
     });
   });
 }
