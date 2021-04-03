@@ -22,11 +22,11 @@ function disableScroll() {
   $page.scrollTop = $window.scrollY;
 }
 
-function firstPage() {
+async function firstPage() {
   // First page will appear, and page will appear when from list movie . With status 3
 
   // Get data from json
-  $.getJSON(json_path, function (data) {
+  await $.getJSON(json_path, function (data) {
     // For movie rank 1 that will appear first
     let spotlight = data.find((el) => el.rank == 1);
 
@@ -46,8 +46,9 @@ function firstPage() {
 
     // Call Function
     showMovie(spotlight, 3);
-    cardMovie();
   });
+
+  cardMovie();
 }
 
 function showMovie(movie, status) {
