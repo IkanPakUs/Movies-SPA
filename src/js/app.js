@@ -180,6 +180,7 @@ function getList() {
 		firstPage();
 		$("#movie-page").removeClass("list-mode");
 		movieList(0);
+		$(".form-control").val("");
 	});
 }
 
@@ -222,10 +223,10 @@ function trendingDisplay(movie) {
 	$.each(movie, function (id, movie) {
 		$(".trending-card-movies").append(
 			`<div class="card">
-          <div class="card-movie ${movie.page}" movie="${movie.name}">
-              <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-          </div>
-      </div>`
+				<div class="card-movie ${movie.page}" movie="${movie.name}">
+					<img src="src/image/${movie.poster}" class="card-img-top" alt="...">
+				</div>
+			</div>`
 		);
 	});
 }
@@ -249,12 +250,12 @@ function backgroundDisplay(status, movie) {
 function listDisplay(movie) {
 	$(".row-card").append(
 		`<div class="col">
-        <div class="card card-list">
-            <div class="card-movie" movie="${movie.name}">
-                <img src="src/image/${movie.poster}" class="card-img-top" alt="...">
-            </div>
-        </div>
-    </div>`
+			<div class="card card-list">
+				<div class="card-movie" movie="${movie.name}">
+					<img src="src/image/${movie.poster}" class="card-img-top" alt="...">
+				</div>
+			</div>
+		</div>`
 	);
 }
 
