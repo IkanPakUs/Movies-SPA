@@ -271,7 +271,7 @@ function detailDisplay(movie) {
                 <h2>${movie.name}</h2>
             </div>
             <div class="detail-desc">
-                <p>Y${movie.desc}</p>
+                <p>${movie.desc}</p>
             </div>
             <div class="info-movie">
                 <div class="rating">
